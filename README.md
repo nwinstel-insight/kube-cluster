@@ -1,4 +1,2 @@
-# kube-cluster
-Kubernetes cluster stood up at home with kubeadm
-
-test
+# kubeadm-cluster
+Home cluster via kubeadm
