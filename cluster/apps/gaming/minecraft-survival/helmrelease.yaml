@@ -9,33 +9,37 @@ spec:
   chart:
     spec:
       # renovate: registryUrl=https://itzg.github.io/minecraft-server-charts/
-      chart: minecraft
+      chart: minecraft-bedrock
       sourceRef:
         kind: HelmRepository
         name: minecraft-server-charts
         namespace: flux-system
       interval: 5m
   values:
+    image:
+      repository: itzg/minecraft-bedrock-server
+      tag: latest
+      pullSecret: false
     resources:
       requests:
         memory: 512Mi
         cpu: 500m
-      limits:
-        memory: 3Gi
-        cpu: 1000m
     minecraftServer:
       eula: "TRUE"
-      type: "PAPER"
-      pvp: "false"
+      version: "LATEST"
       gameMode: survival
-      motd: "Ethans Gaming Dungeon Survival Server"
-      ops: "EthanDstroyr"
-      memory: 8192M
+      maxPlayers: 20
+      difficulty: normal
+      serverName: EthanDstroyrsServ
+      ops: "2535460828971767"
       serviceType: LoadBalancer
-      loadBalancerIP: "${MC_SURV_ADDR}"
-    podAnnotations:
-      backup.velero.io/backup-volumes: datadir
+      servicePort: 30497
+      maxThreads: 16
+      cheats: false
     persistence:
       dataDir:
         enabled: true
-        existingClaim: mc-survival-v1
+        existingClaim: mc-survival-v3
+
+    serviceAnnotations:
+      metallb.universe.tf/loadBalancerIPs: ${SVC_MC_ADDR}
