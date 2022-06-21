@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: metallb
       namespace: metallb-system
-    - name: istio-base
+    - name: istiod
       namespace: istio-system
   maxHistory: 3
   interval: 1m0s
