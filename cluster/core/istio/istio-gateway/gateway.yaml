@@ -1,0 +1,40 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: istio-ingressgateway
+spec:
+  selector:
+    app: istio-gateway
+  servers:
+    - hosts:
+        - '*.${SECRET_DOMAIN}'
+        - '${SECRET_DOMAIN}'
+        - '*.${SECRET_DOMAIN2}'
+        - '${SECRET_DOMAIN2}'
+        - '*.${SECRET_DOMAIN3}'
+        - '${SECRET_DOMAIN3}'
+        - '${INTERNAL_DOMAIN}'
+        - '*.${INTERNAL_DOMAIN}'
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+
+    - hosts:
+        - '*.${SECRET_DOMAIN}'
+        - '${SECRET_DOMAIN}'
+        - '*.${SECRET_DOMAIN2}'
+        - '${SECRET_DOMAIN2}'
+        - '*.${SECRET_DOMAIN3}'
+        - '${SECRET_DOMAIN3}'
+        - '${INTERNAL_DOMAIN}'
+        - '*.${INTERNAL_DOMAIN}'
+      port:
+        name: https
+        number: 443
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        privateKey: /etc/istio/ingressgateway-certs/tls.key
+        serverCertificate: /etc/istio/ingressgateway-certs/tls.crt

@@ -1,0 +1,32 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: istio-base
+  namespace: istio-system
+spec:
+  maxHistory: 3
+  interval: 1m0s
+  suspend: false
+  releaseName: istio-base
+  chart:
+    spec:
+      # renovate: registryUrl=https://istio-release.storage.googleapis.com/charts
+      chart: base
+      version: 1.14.1
+      sourceRef:
+        kind: HelmRepository
+        name: istio-charts
+        namespace: flux-system
+
+  values:
+    base:
+      # Used for helm2 to add the CRDs to templates.
+      enableCRDTemplates: false
+
+      # Validation webhook configuration url
+      # For example: https://$remotePilotAddress:15017/validate
+      validationURL: ""
+
+      # For istioctl usage to disable istio config crds in base
+      enableIstioConfigCRDs: false

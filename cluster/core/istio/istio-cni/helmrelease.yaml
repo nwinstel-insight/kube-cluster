@@ -1,0 +1,42 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: istio-cni
+  namespace: istio-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://istio-release.storage.googleapis.com/charts
+      chart: cni
+      version: 1.14.1
+      sourceRef:
+        kind: HelmRepository
+        name: istio-charts
+        namespace: flux-system
+      interval: 10m
+  install:
+    createNamespace: true
+  values:
+    cni:
+      excludeNamespaces:
+        - istio-system
+        - kube-system
+
+      repair:
+        enabled: true
+        hub: ""
+        tag: ""
+
+        labelPods: true
+        deletePods: true
+
+        initContainerName: "istio-validation"
+
+        brokenPodLabelKey: "cni.istio.io/uninitialized"
+        brokenPodLabelValue: "true"
+    global:
+      # Experimental taint controller for further race condition mitigation
+      taint:
+        enabled: false

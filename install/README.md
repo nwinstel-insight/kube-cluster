@@ -1,18 +1,14 @@
 # Installation
 
-In this case the run1.sh talks me through getting haproxy up and running.
+To install kubernetes:
 
-run2.sh adds all repos and ubuntu packages to install kubernetes.
- 
+* upate the hosts2 file with the servers in the appropriate fields (masters in the masters section, workers in the workers)
 
-init.sh is used to initialize the cluster on hte first (primary) master. Once that script has success it outputs what the commands are to 
-add additional nodes.
+* scp cgroup_driver.sh to all nodes and execute. Once done edit the toml it creates (/etc/containerd/config.toml) and change the systemdCgroup setting to true. [Full instructions are here](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd)
 
-MAKE SURE TO ADD THE --pod-network-cidr and that it matches the values in the flannel.yml.
+* scp over the kube-vip.yaml to the primary control-plane server and copy it in to /etc/kubernetes/manifests **make sure the address setting is to the desired Load Balancer IP**
 
-Apply flannel.yml via ```kubectl apply -f flannel.yml```. This can be done after installation of the first node. It uses a Daemonset so it will automagically spin up more instances as new nodes join.
+* scp the init.sh script to the primary control-plane server/node. Alter the attress in the --controle-plane-endpoint setting to match the address in kube-vip. Execute it. It should succeed. Copy the commands it gives for how to join other servers.
 
-NOTE: My installation uses wireguard as flannel's backend. Type vxlan would revert to the "old" way.
+* use the command on the remaining servers.
 
-
-Right now if the primary master node is down kube still does not respond, even if I can ping the HAProxy address. Is this normal?
