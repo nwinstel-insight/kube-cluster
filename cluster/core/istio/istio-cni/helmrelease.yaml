@@ -5,6 +5,11 @@ metadata:
   name: istio-cni
   namespace: istio-system
 spec:
+  dependsOn:
+    - name: metallb
+      namespace: metallb-system
+    - name: istio-base
+      namespace: istio-system
   interval: 5m
   chart:
     spec:

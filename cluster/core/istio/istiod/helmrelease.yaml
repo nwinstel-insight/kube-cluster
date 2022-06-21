@@ -5,6 +5,11 @@ metadata:
   name: istiod
   namespace: istio-system
 spec:
+  dependsOn:
+    - name: metallb
+      namespace: metallb-system
+    - name: istio-base
+      namespace: istio-system
   maxHistory: 3
   interval: 1m0s
   suspend: false
