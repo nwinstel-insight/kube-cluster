@@ -8,7 +8,7 @@ resources:
   - bitnami-charts.yaml
   - external-dns.yaml
   - grafana-charts.yaml
-  - istio-charts.yamll
+  - istio-charts.yaml
   - jetstack-charts.yaml
   - k8s-at-home-charts.yaml
   - k8s-dashboard.yaml
