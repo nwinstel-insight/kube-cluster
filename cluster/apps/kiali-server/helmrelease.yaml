@@ -13,7 +13,7 @@ spec:
       version: 1.9.0
       sourceRef:
         kind: HelmRepository
-        name: kaili-charts
+        name: kiali-charts
         namespace: flux-system
       interval: 5m
   values:
