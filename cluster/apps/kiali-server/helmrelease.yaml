@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://kubernetes-sigs.github.io/external-dns
       chart: kiali-server
-      version: 1.47.0
+      version: 1.52.0
       sourceRef:
         kind: HelmRepository
         name: kiali-charts
@@ -23,3 +23,12 @@ spec:
     auth:
       strategy: "anonymous"
     istio_namespace: istio-system
+      prometheus-prometheus
+    external_services:
+      prometheus:
+        url: "http://prometheus-prometheus.monitoring.svc.cluster.local:9090/"
+      grafana:
+        enabled: true
+        in_cluster_url: 'http://grafana.monitoring.svc.cluster.local:3000/'
+        # Public facing URL of Grafana
+        url: 'https://grafana.${INTERNAL_DOMAIN}/grafana'
