@@ -10,12 +10,16 @@ spec:
     spec:
       # renovate: registryUrl=https://kubernetes-sigs.github.io/external-dns
       chart: kiali-server
-      version: 1.30.0
+      version: 1.47.0
       sourceRef:
         kind: HelmRepository
         name: kiali-charts
         namespace: flux-system
       interval: 5m
+  dependsOn:
+    - name: kube-prometheus-stack
+      namespace: observability
   values:
     auth:
       strategy: "anonymous"
+    istio_namespace: istio-system
