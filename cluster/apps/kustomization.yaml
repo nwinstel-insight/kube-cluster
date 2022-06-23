@@ -5,6 +5,7 @@ resources:
   # - dev
   # - gaming
   # - home
+  - kiali-server
   # - media
   # - monitoring
   # - network
