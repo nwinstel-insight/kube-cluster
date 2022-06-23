@@ -1,0 +1,23 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kiali
+  namespace: istio-system
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: kiali.${INTERNAL_DOMAIN}
+      http:
+        paths:
+          - backend:
+              service:
+                name: kiali
+                port:
+                  number: 20001
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - kiali.${INTERNAL_DOMAIN}
+    - secretName: kiali-tls-internal
