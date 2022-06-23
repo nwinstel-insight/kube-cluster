@@ -5,3 +5,4 @@ metadata:
   name: k8s-dashboard
   labels:
     ns: k8s-dashboard
+    istio-injection: enabled

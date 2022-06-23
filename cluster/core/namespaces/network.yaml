@@ -5,3 +5,4 @@ metadata:
   name: network
   labels:
     ns: network
+    istio-injection: enabled
