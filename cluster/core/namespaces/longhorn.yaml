@@ -5,4 +5,3 @@ metadata:
   name: longhorn-system
   labels:
     ns: longhorn-system
-    istio-injection: enabled
