@@ -23,7 +23,6 @@ spec:
     auth:
       strategy: "anonymous"
     istio_namespace: istio-system
-      prometheus-prometheus
     external_services:
       prometheus:
         url: "http://prometheus-prometheus.monitoring.svc.cluster.local:9090/"
