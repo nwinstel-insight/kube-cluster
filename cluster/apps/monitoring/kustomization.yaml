@@ -9,5 +9,5 @@ resources:
   - promtail
   - cert-manager
   #- rook-ceph
-  - thanos
+  # - thanos
   - kube-prometheus-stack
