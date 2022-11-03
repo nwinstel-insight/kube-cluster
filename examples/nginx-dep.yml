@@ -23,6 +23,13 @@ spec:
           volumeMounts:
             - mountPath: /natetesting
               name: mypvc-claim
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "15m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
       volumes:
         - name: mypvc-claim
           persistentVolumeClaim:
